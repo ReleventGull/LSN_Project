@@ -10,7 +10,12 @@ const Callback = () => {
         setToken()
     }, [])
     return (
-        <h2>Callback component</h2>
+        <div className="flex h-full bg-backgroundPrimary">
+                <div className="flex flex-col justify-center content-center m-auto p-2">
+                    <h2 className="text-textPrimary">You are successfully authorized</h2>
+                    <button className="hover:bg-backgroundPrimary hover:text-textPrimary hover:duration-200 p-1 rounded bg-textPrimary duration-200 text-backgroundPrimary">Continue</button>
+                </div>
+        </div>
     )
 }
 
