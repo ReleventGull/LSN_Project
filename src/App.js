@@ -9,19 +9,26 @@ const App = () => {
     const navigate = useNavigate()
     
     const checkToken = async(token) => {
+        console.log("checking token")
         let response = await getUserProfile(token)
         if (response.status == 401) {
             localStorage.removeItem("LSNToken")
             window.location.refresh
+        }else {
+            navigate('/app')
         }
         return response
     }
     const checkUrl = () => {
+        console.log("Did i run")
         let url = window.location.href
-        return url.slice(url.indexOf("=") + 1, url.indexOf('&'))
+        if(url.indexOf('=') == -1) {
+            return 0
+        }
+        let result = url.slice(url.indexOf("=") + 1, url.indexOf('&'))
+        return result
     }
     useEffect(() => {
-        console.log("I ran")
         const token = localStorage.getItem("LSNToken")
         if (token) {
             let response = checkToken(token)
