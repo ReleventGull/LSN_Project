@@ -3,6 +3,7 @@ import { redirectUser, revokeAccess } from "./auth"
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { getUserProfile } from "./auth"
 import Callback from "./Callback"
+import LSNApp from "./LSNApp"
 const App = () => {
 
     const navigate = useNavigate()
@@ -34,6 +35,7 @@ const App = () => {
     return (
             <Routes>
                 <Route path='callback' element={<Callback/>}/>
+                <Route path='app' element={<LSNApp/>}/>
             </Routes>
     )
 }
