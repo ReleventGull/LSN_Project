@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        playbar: '#06070E',
         backgroundPrimary: '#101419',
         textPrimary: '#ADD9F4',
         darkPrimary: '#476C9B',
