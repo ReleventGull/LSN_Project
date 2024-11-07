@@ -1,7 +1,7 @@
 
 const Playbar = () => {
     return (
-        <div className=" bg-playbar h-20">
+        <div className=" bg-white h-20">
 
         </div>
     )
