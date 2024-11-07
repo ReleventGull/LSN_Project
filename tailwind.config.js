@@ -10,7 +10,11 @@ module.exports = {
         backgroundPrimary: '#101419',
         textPrimary: '#ADD9F4',
         darkPrimary: '#476C9B',
-        darkSecondary: '468C98'
+        darkSecondary: '468C98',
+        backgroundSecondary: '#1A1B24',
+        backgroundThird: '#2E2F3A',
+        backgroundFourth: '#6C6D7A',
+        backgroundFifth: '#B1B3C0'
       }
     },
   },
