@@ -18,7 +18,7 @@ const Home = () => {
         <div className="grow bg-playbar">
             <div className="w-full p-2">
             <h1 className="font-bold mb-1 text-textPrimary">Recently Played</h1>
-                <div className="grid p-3 bg-backgroundSecondary rounded-md grid-cols-4 gap-2">
+                <div className="grid p-3 bg-backgroundSecondary rounded-md grid-cols-2 gap-2 lg:grid-cols-4">
                     
                     {recentlyPlayed.map(card =>
                         <RecentCard card={card}/>
