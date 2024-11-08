@@ -1,9 +1,14 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getRecentlyListened } from "./api"
+import {RecentCard} from './Components'
+
 const Home = () => {
+    const [recentlyPlayed, setRecentlyPlayer] = useState([])
+    
     const getRecentList = async() => {
-        const response = await getRecentlyListened({token: localStorage.getItem("LSNToken"), limit: 10})
-        console.log(response)
+        const response = await getRecentlyListened({token: localStorage.getItem("LSNToken"), limit: 8})
+        setRecentlyPlayer(response.items)
+        console.log('Recent played bro', recentlyPlayed)
     }
 
     useEffect(() => {
@@ -11,7 +16,15 @@ const Home = () => {
     }, [])
     return (
         <div className="grow bg-playbar">
-            
+            <div className="w-full p-2">
+            <h1 className="font-bold mb-1 text-textPrimary">Recently Played</h1>
+                <div className="grid p-3 bg-backgroundSecondary rounded-md grid-cols-2 gap-2 lg:grid-cols-4">
+                    
+                    {recentlyPlayed.map(card =>
+                        <RecentCard card={card}/>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }
