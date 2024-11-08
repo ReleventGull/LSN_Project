@@ -1,5 +1,5 @@
-import {Route, Routes, useNavigate} from 'react-router-dom'
-import { Playbar, Navbar, Home} from './Components/Components'
+import {Route, Routes, useNavigate, Outlet } from 'react-router-dom'
+import { Playbar, Navbar, Home, Playlist} from './Components/Components'
 
 const LSNApp = () => {
     return(
@@ -7,9 +7,11 @@ const LSNApp = () => {
             <div className='flex grow bg-playbar'>
                 <Navbar />
                 <Routes>
-                    <Route path='' element={<Home />}/>
+                    <Route path='/' element={<Home />}/>
+                    <Route path='playlists' element={<Playlist />}/>
                 </Routes>
-            </div>
+          
+                </div>
         <Playbar />
         </div>
     )
