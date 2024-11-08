@@ -3,13 +3,17 @@
 const RecentCard = ({card}) => {
     console.log(card)
     return (
-        <div className="h-10 flex bg-backgroundThird rounded-md">
-            
+        <div className="cursor-pointer group duration-75 h-14 flex bg-backgroundThird rounded-md hover:bg-backgroundFourth">
                 <img className="h-full" src={card.track.album.images[0].url}/>
-        
-            <div className="flex content-center items-center">
-                <h1 className="ml-1 flex content-center justify-center p-1 font-bold text-textPrimary">{card.track.name}</h1>
+            <div className="flex grow content-center items-center">
+                <h1 className="ml-2 mr-2 flex content-center justify-center font-bold text-textPrimary">{card.track.name}</h1>
             </div>
+            <div className="flex items-center w-12 h-full ml-auto">
+            <svg className="hover:bg-white duration-100 opacity-0 group-hover:opacity-100 bg-textPrimary relative p-1 rounded-full h-8 rotate-90" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path className="-translate-y-0.5" d="M21,21H3L12,3Z"/>
+            </svg>
+          
+                </div>
         </div>
     )
 }
