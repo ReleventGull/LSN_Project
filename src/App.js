@@ -14,8 +14,6 @@ const App = () => {
         if (response.status == 401) {
             localStorage.removeItem("LSNToken")
             window.location.refresh
-        }else {
-            navigate('/app')
         }
         return response
     }
@@ -41,8 +39,8 @@ const App = () => {
 
     return (
             <Routes>
-                <Route path='callback' element={<Callback/>}/>
-                <Route path='app' element={<LSNApp/>}/>
+                <Route path='/callback' element={<Callback/>}/>
+                <Route path='/app/*' element={<LSNApp/>}/>
             </Routes>
     )
 }

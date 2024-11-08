@@ -3,7 +3,7 @@ const arr = [
     {
         id: 1,
         name: 'Home',
-        url: '/app',
+        url: '',
         fillColor: strokeColor,
         paths: [
             {
@@ -23,7 +23,7 @@ const arr = [
     {
         id: 2,
         name: "Playlist",
-        url: '/app/playlists',
+        url: 'playlists',
         fillColor: strokeColor,
         paths: [
             {
