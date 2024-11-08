@@ -4,6 +4,7 @@ const arr = [
         id: 1,
         name: 'Home',
         url: '',
+        navpath: '/app',
         fillColor: strokeColor,
         paths: [
             {
@@ -24,6 +25,7 @@ const arr = [
         id: 2,
         name: "Playlist",
         url: 'playlists',
+        navpath: '/app/playlists',
         fillColor: strokeColor,
         paths: [
             {
