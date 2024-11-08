@@ -1,7 +1,6 @@
 
 
 const RecentCard = ({card}) => {
-    console.log(card)
     return (
         <div className="cursor-pointer group duration-75 h-14 flex bg-backgroundThird rounded-md hover:bg-backgroundFourth">
                 <img className="h-full" src={card.track.album.images[0].url}/>
