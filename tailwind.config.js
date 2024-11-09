@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+  /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}"
@@ -15,9 +15,9 @@ module.exports = {
         backgroundThird: '#2E2F3A',
         backgroundFourth: '#6C6D7A',
         backgroundFifth: '#B1B3C0'
-      }
+      },
     },
   },
-  plugins: [],
+  plugins: [ require('@tailwindcss/aspect-ratio'),],
 }
 
