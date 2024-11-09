@@ -3,7 +3,7 @@
 const RecentCard = ({card}) => {
     return (
         <div className="cursor-pointer group duration-75 h-14 flex bg-backgroundThird rounded-md hover:bg-backgroundFourth">
-                <img className="h-full" src={card.track.album.images[0].url}/>
+                <img className="rounded-l-md h-full" src={card.track.album.images[0].url}/>
             <div className="flex overflow-hidden text-ellipsis whitespace-nowrap grow content-center items-center">
                 <h1 className="ml-2 text-xs mr-2 flex content-center justify-center font-bold text-textPrimary">{card.track.name}</h1>
             </div>
