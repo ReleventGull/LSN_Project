@@ -28,3 +28,20 @@
   .rangeSlider::-moz-range-thumb {
     @apply h-4 w-4 bg-blue-500 rounded-full;
   }
+
+.skipButton {
+  @apply h-5 mt-2 cursor-pointer
+}
+.skipButton path {
+  fill:#B1B3C0;
+  transition: 1000;
+}
+
+.skipButton:hover path {
+  fill:white;
+  transition: 1000;
+}
+
+.skipButton.second {
+  @apply rotate-180
+}

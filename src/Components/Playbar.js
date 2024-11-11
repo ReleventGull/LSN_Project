@@ -8,7 +8,7 @@ const Playbar = () => {
                     </div>
                     <div className="h-full">
                         <div className="flex mt-2 flex-row w-full content-end justify-center gap-10">
-                            <svg  className="h-5 mt-2" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg  className="skipButton" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
                             
@@ -16,9 +16,10 @@ const Playbar = () => {
                                 <path className="-translate-y-0.5" d="M21,21H3L12,3Z"/>
                             </svg>
                             
-                            <svg  className="h-5 mt-2 rotate-180" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path  d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
+                            <svg  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path className="color-#FFFFFFF"  d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
+                        
                         </div>
                             <div className="w-full">
                                 <div className="w-full">
