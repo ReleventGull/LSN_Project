@@ -18,7 +18,7 @@ const Home = () => {
         getUsersTopArtists()
     }, [])
     return (
-        <div className="grow bg-playbar overflow-auto">
+        <div className="grow bg-playbar overflow-auto overflow-x-hidden">
             
             <div className="w-full p-2">
             <h1 className="font-bold mb-1 text-textPrimary">Recently Played</h1>
