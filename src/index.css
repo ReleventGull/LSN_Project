@@ -34,14 +34,23 @@
 }
 .skipButton path {
   fill:#B1B3C0;
-  transition: 1000;
+  transition: .2s;
 }
 
 .skipButton:hover path {
   fill:white;
-  transition: 1000;
+  transition: .2s;
 }
 
 .skipButton.second {
   @apply rotate-180
+}
+
+.playButton {
+  @apply h-6 p-1 h-9 rotate-90 bg-white rounded-full duration-75 cursor-pointer
+}
+
+.playButton:hover {
+  background-color: #ADD9F4;
+  transition: .2s;
 }

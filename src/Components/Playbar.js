@@ -12,7 +12,7 @@ const Playbar = () => {
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
                             
-                            <svg fill="#000000" className="h-6 p-1 h-9 rotate-90 bg-white rounded-full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg fill="#000000" className="playButton" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path className="-translate-y-0.5" d="M21,21H3L12,3Z"/>
                             </svg>
                             
