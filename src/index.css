@@ -7,3 +7,50 @@
     margin: 0;
     padding: 0;
 }
+.rangeSlider {
+    @apply appearance-none h-1 w-full bg-gray-300 rounded-full; /* For overall styling */
+  }
+  
+  .rangeSlider::-webkit-slider-runnable-track {
+    @apply h-1 rounded-full bg-gray-300; /* Rounded track styling */
+  }
+  
+  .rangeSlider::-webkit-slider-thumb {
+    @apply h-2 w-2 bg-blue-500 rounded-full; /* Thumb styling */
+    appearance: none; /* Necessary for WebKit browsers */
+    margin-top: -.1rem
+  }
+  
+  .rangeSlider::-moz-range-track {
+    @apply h-2 rounded-full bg-gray-300;
+  }
+  
+  .rangeSlider::-moz-range-thumb {
+    @apply h-4 w-4 bg-blue-500 rounded-full;
+  }
+
+.skipButton {
+  @apply h-5 mt-2 cursor-pointer
+}
+.skipButton path {
+  fill:#B1B3C0;
+  transition: .2s;
+}
+
+.skipButton:hover path {
+  fill:white;
+  transition: .2s;
+}
+
+.skipButton.second {
+  @apply rotate-180
+}
+
+.playButton {
+  @apply h-6 p-1 h-9 rotate-90 bg-white rounded-full duration-75 cursor-pointer
+}
+
+.playButton:hover {
+  background-color: #ADD9F4;
+  transition: .2s;
+}
