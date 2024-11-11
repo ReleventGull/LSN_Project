@@ -4,7 +4,7 @@ import { Playbar, Navbar, Home, Playlist} from './Components/Components'
 const LSNApp = () => {
     return(
         <div className="flex flex-col h-full">
-            <div className='flex grow bg-playbar'>
+            <div className='flex grow bg-playbar overflow-hidden'>
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />}/>
