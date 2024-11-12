@@ -1,12 +1,12 @@
 
 
-const TopArtistsCard = ({card}) => {
+const TopArtistsCard = ({card, index}) => {
     let style = {
         backgroundImage: `url(${card.images[0].url})`
     }
     console.log(card.images[0].height)
     return (
-        <div className="flex flex-col flex-1 w-auto cursor-pointer p-2 rounded-md hover:bg-backgroundSecondary">
+        <div className={`recentCard ${index == 5 ? ' last' : index == 4 ? 'secondLast' : index == 3 ? 'thirdLast' : index == 2 ? 'fourthlast' : ''}`}>
             <div className="grow rounded-md aspect-w-1 aspect-h-1">
                 <img className="rounded-md" src={card.images[0].url}/>
             </div>

@@ -31,9 +31,9 @@ const Home = () => {
 
             <div className="w-full p-2">
                 <h1 className="font-bold mb-1 text-textPrimary">Top Artists</h1>
-                <div className="grid grid-cols-2 gap-2 lg:flex">
-                    {topArtists.map(card =>
-                        <TopArtistsCard card={card}/>
+                <div className="gap-2 flex">
+                    {topArtists.map((card, index) =>
+                        <TopArtistsCard index={index} card={card}/>
                     )}
                 </div>
             </div>
