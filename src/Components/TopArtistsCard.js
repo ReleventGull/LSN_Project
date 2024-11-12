@@ -1,7 +1,6 @@
 
 
 const TopArtistsCard = ({images, card, index}) => {
-    console.log('card :', card)
     let style = {
         backgroundImage: `url(${images[0].url})`
     }

@@ -9,7 +9,6 @@ const Home = () => {
     const [recommended, setRecommended] = useState([])
     const getRecentList = async() => {
         const response = await getRecentlyListened({token: localStorage.getItem("LSNToken"), limit: 8})
-        console.log(response)
         setRecentlyPlayer(response.items)
     }
     const getUsersTopArtists = async() => {
@@ -17,7 +16,6 @@ const Home = () => {
         setTopArtists(response.items)
         const arr = selectRandomArtists(response.items)
         const responseTwo = await getRecommendations({token: localStorage.getItem("LSNToken"), limit: 7, aritistIds: arr})
-        console.log(responseTwo.tracks)
         setRecommended(responseTwo.tracks)
     }
 
@@ -46,7 +44,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="w-full p-2">
+          <div className="w-full p-2">
                 <h1 className="font-bold mb-1 text-textPrimary">Recommendations</h1>
                 <div className="gap-2 flex">
                     {recommended.map((card, index) =>
