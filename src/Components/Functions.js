@@ -30,6 +30,14 @@ const sortGenres = (tracks) => {
     return arr
 }
 
+const selectRandomArtists = (artists) => {
+    let arr = []
+    for(let i = 1; i <= 3; i++) {
+        arr.push(artists[Math.floor(Math.random() * artists.length)].id)
+    }
+    return arr
+}
 module.exports = {
-    sortGenres
+    sortGenres,
+    selectRandomArtists
 }

@@ -27,3 +27,17 @@ export const getTopArtists = async ({ token, limit }) => {
         console.log("Error bro", error);
     }
 };
+
+export const getRecommendations = async ({ token, limit, aritistIds }) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=${limit}&seed_artists=${aritistIds.join(',')}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        const data = await response.json();
+        return data; 
+    } catch (error) {
+        console.log("Error bro", error);
+    }
+};
