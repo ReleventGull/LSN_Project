@@ -54,3 +54,37 @@
   background-color: #ADD9F4;
   transition: .2s;
 }
+
+.recentCard {
+  @apply flex flex-col flex-1 w-auto cursor-pointer p-2 rounded-md hover:bg-backgroundSecondary
+}
+
+
+
+@media (max-width: 1030px) {
+  .recentCard.last {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .recentCard.secondLast {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .recentCard.thirdLast {
+    display: none;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .recentCard.fourthlast {
+    display: none;
+  }
+  .recentCard {
+    @apply p-1 gap-1
+  }
+}
