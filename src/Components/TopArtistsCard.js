@@ -4,9 +4,9 @@ const TopArtistsCard = ({card, index}) => {
     let style = {
         backgroundImage: `url(${card.images[0].url})`
     }
-    console.log(card.images[0].height)
+
     return (
-        <div className={`recentCard ${index == 5 ? ' last' : index == 4 ? 'secondLast' : index == 3 ? 'thirdLast' : index == 2 ? 'fourthlast' : ''}`}>
+        <div className={`recentCard ${index == 6 ? ' last' : index == 5 ? 'secondLast' : index == 4 ? 'thirdLast' : index == 3 ? 'fourthlast' : ''}`}>
             <div className="grow rounded-md aspect-w-1 aspect-h-1">
                 <img className="rounded-md" src={card.images[0].url}/>
             </div>
