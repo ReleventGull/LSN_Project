@@ -10,15 +10,20 @@ const LSNApp = () => {
         const player = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
             getOAuthToken: cb => { cb(token); },
-            volume: 0.5
+            volume: 1
         })
         player.connect()
         player.addListener('ready', async({device_id}) => {
-            console.log(device_id)
+            const response = await activateDevice({token: localStorage.getItem('LSNToken'), deviceId: device_id})
+                console.log(response)
+
             setDeviceId(device_id)
            player.isLoaded.then((stuff) => {
                 console.log(player)
            })
+        })
+        player.addListener('authentication_error', () => {
+            console.log("error pussy")
         })
     }
 
