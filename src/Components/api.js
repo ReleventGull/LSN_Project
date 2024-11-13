@@ -41,3 +41,39 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
         console.log("Error bro", error);
     }
 };
+
+export const playTrack = async({token, uri}) => {
+    try {
+        console.log(uri)
+        const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              uris: [uri],
+            }),
+          })
+    }catch(error){
+        console.log("Error", error)
+    }
+}
+
+export const activateDevice = async({token, deviceId}) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: "PUT",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                device_ids: [deviceId]
+            })
+        })
+        return response
+    }catch(error){
+        console.log("Error", error)
+    }
+}

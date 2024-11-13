@@ -1,5 +1,7 @@
-
+import { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 const Playbar = () => {
+
     return (
         <div className="bg-white h-20">
                 <div className="grid grid-cols-[1fr_1.5fr_1fr] w-full h-full bg-playbar">
