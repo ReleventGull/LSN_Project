@@ -3,7 +3,7 @@ import { getRecentlyListened, getTopArtists, getRecommendations } from "./api"
 import {RecentCard, TopArtistsCard} from './Components'
 const {sortGenres, selectRandomArtists} = require('./Functions')
 
-const Home = () => {
+const Home = ({player, deviceId}) => {
     const [recentlyPlayed, setRecentlyPlayer] = useState([])
     const [topArtists, setTopArtists] = useState([])
     const [recommended, setRecommended] = useState([])
@@ -30,7 +30,7 @@ const Home = () => {
             <h1 className="font-bold mb-1 text-textPrimary">Recently Played</h1>
                 <div className="grid p-3 bg-backgroundSecondary rounded-md grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
                     {recentlyPlayed.map(card =>
-                        <RecentCard images={card.images} card={card}/>
+                        <RecentCard deviceId={deviceId} player={player} images={card.images} card={card}/>
                     )}
                 </div>
             </div>
