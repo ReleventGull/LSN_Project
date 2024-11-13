@@ -42,9 +42,9 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
     }
 };
 
-export const playTrack = async({token, uri}) => {
+export const playTrack = async({token, uri, deviceId}) => {
     try {
-        console.log(uri)
+        console.log('Playing at this device', deviceId)
         const response = await fetch('https://api.spotify.com/v1/me/player/play', {
             method: 'PUT',
             headers: {
@@ -62,14 +62,15 @@ export const playTrack = async({token, uri}) => {
 
 export const activateDevice = async({token, deviceId}) => {
     try {
-        const response = await fetch(`https://api.spotify.com/v1/me/player/play`, {
+        const response = await fetch(`https://api.spotify.com/v1/me/player`, {
             method: "PUT",
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                device_ids: [deviceId]
+                device_ids: [deviceId],
+                play: true
             })
         })
         return response
