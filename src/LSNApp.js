@@ -5,28 +5,36 @@ import { activateDevice } from './Components/api'
 const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
-    const initializePlayer = () => {
+    const initializePlayer = async() => {
+        console.log("Initiazling... Player is ", player)
         const token = localStorage.getItem('LSNToken')
-        const player = new Spotify.Player({
+        const webPlayer = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
             getOAuthToken: cb => { cb(token); },
             volume: 1
         })
-        player.connect()
-        player.addListener('ready', async({device_id}) => {
-            const response = await activateDevice({token: localStorage.getItem('LSNToken'), deviceId: device_id})
-                console.log(response)
-
-            setDeviceId(device_id)
-           player.isLoaded.then((stuff) => {
-                console.log(player)
-           })
-        })
-        player.addListener('authentication_error', () => {
-            console.log("error pussy")
+        await webPlayer.connect().then(() => {
+            setPlayer(webPlayer)
         })
     }
-
+    useEffect(() => {
+        if (!player)  {
+            console.log("No player set")
+            return
+        }
+        player.addListener('ready', async({device_id}) => {
+            const response = await activateDevice({token: localStorage.getItem('LSNToken'), deviceId: device_id})
+            setDeviceId(device_id)
+        })
+        player.addListener('authentication_error', () => {
+            console.log("Error")
+        })
+        return () => {
+            player.removeListener('ready',);
+            player.removeListener('authentication_error',);
+        };
+    }, [player])
+   
     useEffect(() => {
             const script = document.createElement('script')
             script.src = "https://sdk.scdn.co/spotify-player.js"
