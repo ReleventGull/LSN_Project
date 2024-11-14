@@ -80,7 +80,9 @@
 .recentCard {
   @apply flex flex-col flex-1 w-auto cursor-pointer p-2 rounded-md hover:bg-backgroundSecondary overflow-hidden text-ellipsis whitespace-nowrap
 }
-
+.pausePath {
+  transform: scale(.8) translate(.2rem, .05rem)
+}
 .volumeButton {
   @apply h-6
 }

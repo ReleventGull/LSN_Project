@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-const Playbar = ({isPaused, songPlaying, player}) => {
-
+const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
+    const onToggle = () => {
+        player.togglePlay().then(result => {
+            setIsPlaying((val) => !val)
+        })
+    }
     return (
         <div className="bg-white h-20">
                 <div className="grid grid-cols-[1fr_1.5fr_1fr] w-full h-full bg-playbar">
@@ -26,8 +30,20 @@ const Playbar = ({isPaused, songPlaying, player}) => {
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
                             
-                            <svg fill="#000000" className="playButton" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path className="-translate-y-0.5" d="M21,21H3L12,3Z"/>
+                            <svg onClick={onToggle} fill="#000000" className={isPlaying ? 'h-6 p-1 h-9 bg-white rounded-full duration-75 cursor-pointer' : 'playButton'} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                {
+                                    isPlaying ?
+                                    <>
+                                <path className="translate-y-1 translate-x-1" d="M7 1H2V15H7V1Z" fill="#000000"/>
+                                <path className="translate-y-1 translate-x-1 " d="M14 1H9V15H14V1Z" fill="#000000"/>
+                                    </>
+                                    :
+                                <path className="pausePath" d="M21,21H3L12,3Z"/>
+                                }
+                                
+                                
+                                
+
                             </svg>
                             
                             <svg  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
