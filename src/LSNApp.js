@@ -6,8 +6,9 @@ const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
     const [songPlaying, setSongPlaying] = useState(null)
-    const [isPaused, setIsPaused] = useState(null)
+    const [isPlaying, setIsPlaying] = useState(null)
     const intervalRef = useRef(null)
+    
     const initializePlayer = async() => {
         const token = localStorage.getItem('LSNToken')
         const webPlayer = new Spotify.Player({
@@ -37,8 +38,8 @@ const LSNApp = () => {
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }
-            if(isPaused !== response.is_playing) {
-                setIsPaused(response.is_playing)
+            if(isPlaying === null) {
+                setIsPlaying(response.is_playing)
             }
         }, 1000)
         return () => {
@@ -68,7 +69,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar songPlaying={songPlaying} isPaused={isPaused}/>
+        <Playbar setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
