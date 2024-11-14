@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-const Playbar = () => {
+const Playbar = ({isPaused, songPlaying, player}) => {
 
     return (
         <div className="bg-white h-20">
                 <div className="grid grid-cols-[1fr_1.5fr_1fr] w-full h-full bg-playbar">
                     <div className="h-full">
+                        {
+                            !songPlaying ? '' : 
+                        <div className="flex ml-2 gap-5 h-full items-center">
+                            <div className="h-full flex items-center justify-center">
+                                <img className="w-16 rounded-md" src={songPlaying.album.images[0].url}/>
+                            </div>
+                            <div>
+                                <h1 className="text-textPrimary font-bold">{songPlaying.name}</h1>
+                                <p className="text-darkPrimary text-xs text-bold">{songPlaying.artists[0].name}</p>
+                            </div>
+                        </div>   
+                        }
                         
                     </div>
                     <div className="h-full">
