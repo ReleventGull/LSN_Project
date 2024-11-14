@@ -29,8 +29,8 @@ const Home = ({player, deviceId}) => {
             <div className="w-full p-2">
             <h1 className="font-bold mb-1 text-textPrimary">Recently Played</h1>
                 <div className="grid p-3 bg-backgroundSecondary rounded-md grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                    {recentlyPlayed.map(card =>
-                        <RecentCard deviceId={deviceId} player={player} images={card.images} card={card}/>
+                    {recentlyPlayed.map((card, index) =>
+                        <RecentCard key={index} deviceId={deviceId} player={player} images={card.images} card={card}/>
                     )}
                 </div>
             </div>
@@ -39,7 +39,7 @@ const Home = ({player, deviceId}) => {
                 <h1 className="font-bold mb-1 text-textPrimary">Top Artists</h1>
                 <div className="gap-2 flex">
                     {topArtists.map((card, index) =>
-                        <TopArtistsCard images={card.images} index={index} card={card}/>
+                        <TopArtistsCard key={index} images={card.images} index={index} card={card}/>
                     )}
                 </div>
             </div>
@@ -48,7 +48,7 @@ const Home = ({player, deviceId}) => {
                 <h1 className="font-bold mb-1 text-textPrimary">Recommendations</h1>
                 <div className="gap-2 flex">
                     {recommended.map((card, index) =>
-                        <TopArtistsCard images={card.album.images} index={index} card={card}/>
+                        <TopArtistsCard key={index} images={card.album.images} index={index} card={card}/>
                     )}
                 </div>
             </div>

@@ -19,7 +19,6 @@ export const redirectUser = () => {
 
 export const getUserProfile = async(token) => {
     try {
-        console.log("Token on request", token)
         const response = await fetch('https://api.spotify.com/v1/me', {
             method: "GET",
             headers: {

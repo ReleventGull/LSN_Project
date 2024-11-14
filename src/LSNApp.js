@@ -5,6 +5,7 @@ import { activateDevice } from './Components/api'
 const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
+    
     const initializePlayer = () => {
         const token = localStorage.getItem('LSNToken')
         const player = new Spotify.Player({
@@ -15,15 +16,16 @@ const LSNApp = () => {
         player.connect()
         player.addListener('ready', async({device_id}) => {
             const response = await activateDevice({token: localStorage.getItem('LSNToken'), deviceId: device_id})
-                console.log(response)
-
             setDeviceId(device_id)
            player.isLoaded.then((stuff) => {
-                console.log(player)
+                console.log("Player has been loaded")
            })
         })
         player.addListener('authentication_error', () => {
-            console.log("error pussy")
+            console.log("Error")
+        })
+        player.addListener('player_state_changed', (state) => {
+            console.log("Player state here", state)
         })
     }
 

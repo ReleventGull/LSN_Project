@@ -3,7 +3,6 @@ import { playTrack } from "./api"
 const RecentCard = ({card, player, deviceId}) => {
     const playSong = async() => {
         const response = await playTrack({token: localStorage.getItem("LSNToken"), uri: card.track.uri, deviceId: deviceId})
-        console.log(response)
     }
 
     return (
