@@ -5,7 +5,6 @@ import { activateDevice } from './Components/api'
 const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
-    
     const initializePlayer = async() => {
         console.log("Initiazling... Player is ", player)
         const token = localStorage.getItem('LSNToken')
