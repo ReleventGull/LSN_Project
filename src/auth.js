@@ -31,23 +31,15 @@ export const getUserProfile = async(token) => {
     }
 }
 
-const revokeToken = async () => {
-
+export const revokeToken = async (token) => {
     try {
         const response = await fetch('https://accounts.spotify.com/api/token/revoke', {
-            method: 'POST',
             headers: {
-                'Authorization': `Basic ${base64Credentials}`,
+                'Authorization': `Basic ${token}`,
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `token=${accessToken}`, // The token you want to revoke
         });
-
-        if (response.ok) {
-            console.log('Token successfully revoked!');
-        } else {
-            console.error('Failed to revoke token:', response.statusText);
-        }
+        console.log(response)
     } catch (error) {
         console.error('Error revoking token:', error);
     }
