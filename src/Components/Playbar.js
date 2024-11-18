@@ -59,7 +59,7 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs, currentS
                             <div className="w-full grow">
                                 <div className="w-full h-full flex gap-2 items-center align-center justify-center">
                                 <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(currentSongMs), [currentSongMs])}</p>
-                                <input type="range" min="1" max="100" value="1" class="rangeSlider"/>
+                                <input type="range" min="1" max={songMs} value={currentSongMs} class="rangeSlider"/>
                                 <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(songMs), [songMs])}</p>
                                 </div>
                             </div>
