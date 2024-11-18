@@ -1,19 +1,21 @@
 import { useMemo } from "react"
-const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs}) => {
+const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs, currentSongMs}) => {
     console.log("Song miliseconds", songMs)
     const onToggle = () => {
         player.togglePlay().then(result => {
             setIsPlaying((val) => !val)
         })
     }
-    const calculateCurrentStamp = () => {
-        console.log(songMs)
-        if(!songMs) {
+    const calculateCurrentStamp = (milis) => {
+        let miliseconds = milis
+        if(!miliseconds) {
             return '00:00'
         }
-        const hours = Math.floor(songMs/3600000)
-        console.log(hours)
+        const minutes = String(Math.floor(miliseconds/60000)) 
+        miliseconds -= (Number(minutes) * 60000)
+        const seconds = String(Math.floor(miliseconds/1000))
 
+        return `${(minutes.length > 1 ? minutes : minutes.length == 1 ? `0${minutes}` : '00')}:${(seconds.length > 1 ? seconds : seconds.length == 1 ? `0${seconds}` : '00')}`
     }
     return (
         <div className="bg-white h-20">
@@ -56,9 +58,9 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs}) => {
                         </div>
                             <div className="w-full grow">
                                 <div className="w-full h-full flex gap-2 items-center align-center justify-center">
-                                <p className="text-textPrimary text-xs font-bold"></p>
+                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(currentSongMs), [currentSongMs])}</p>
                                 <input type="range" min="1" max="100" value="1" class="rangeSlider"/>
-                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(), [songMs])}</p>
+                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(songMs), [songMs])}</p>
                                 </div>
                             </div>
                         <div>
