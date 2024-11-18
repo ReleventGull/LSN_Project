@@ -1,10 +1,19 @@
-import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
-const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
+import { useMemo } from "react"
+const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs}) => {
+    console.log("Song miliseconds", songMs)
     const onToggle = () => {
         player.togglePlay().then(result => {
             setIsPlaying((val) => !val)
         })
+    }
+    const calculateCurrentStamp = () => {
+        console.log(songMs)
+        if(!songMs) {
+            return '00:00'
+        }
+        const hours = Math.floor(songMs/3600000)
+        console.log(hours)
+
     }
     return (
         <div className="bg-white h-20">
@@ -24,7 +33,7 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
                         }
                         
                     </div>
-                    <div className="h-full">
+                    <div className="h-full flex flex-col">
                         <div className="flex mt-2 flex-row w-full content-end justify-center gap-10">
                             <svg  className="skipButton" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
@@ -40,20 +49,16 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
                                     :
                                 <path className="pausePath" d="M21,21H3L12,3Z"/>
                                 }
-                                
-                                
-                                
-
                             </svg>
-                            
                             <svg  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path className="color-#FFFFFFF"  d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
-                        
                         </div>
-                            <div className="w-full">
-                                <div className="w-full">
+                            <div className="w-full grow">
+                                <div className="w-full h-full flex gap-2 items-center align-center justify-center">
+                                <p className="text-textPrimary text-xs font-bold"></p>
                                 <input type="range" min="1" max="100" value="1" class="rangeSlider"/>
+                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(), [songMs])}</p>
                                 </div>
                             </div>
                         <div>
