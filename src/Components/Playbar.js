@@ -24,7 +24,7 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs, currentS
                         {
                             !songPlaying ? '' : 
                         <div className="flex ml-2 gap-5 h-full items-center">
-                            <div className="h-full flex grow items-center justify-center">
+                            <div className="h-full flex items-center justify-center">
                                 <img className="w-16 rounded-md" src={songPlaying.album.images[0].url}/>
                             </div>
                             <div className="line-clamp-2">
