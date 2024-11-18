@@ -1,4 +1,5 @@
-import {Route, Routes, useNavigate, Outlet, useSearchParams } from 'react-router-dom'
+import {Route, Routes } from 'react-router-dom'
+import { useMemo } from 'react'
 import { Playbar, Navbar, Home, Playlist} from './Components/Components'
 import { useEffect, useState, useRef } from 'react'
 import { activateDevice, getPlaybackState } from './Components/api'
@@ -6,7 +7,10 @@ const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
     const [songPlaying, setSongPlaying] = useState(null)
-    const [isPlaying, setIsPlaying] = useState(null)
+    const [isPlaying, setIsPlaying] = useState(null)    
+    const [songMs, setSongMs] = useState(null)
+    const [currentSongMs, setCurrentSongMs] = useState(null)
+    
     const intervalRef = useRef(null)
     
     const initializePlayer = async() => {
@@ -32,7 +36,7 @@ const LSNApp = () => {
         player.addListener('authentication_error', () => {
             console.log("Error")
         })
-        useRef.current = setInterval( async() => {
+        intervalRef.current = setInterval( async() => {
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
             console.log("Fetched Respones", response)
             if (!songPlaying || songPlaying.id !== response.id) {
@@ -41,11 +45,17 @@ const LSNApp = () => {
             if(isPlaying === null) {
                 setIsPlaying(response.is_playing)
             }
+            if(songMs !== response.item.duration_ms) {
+                setSongMs(response.item.duration_ms)
+            }
+            if(currentSongMs !== response.progress_ms) {
+                setCurrentSongMs(response.progress_ms)
+            }
         }, 1000)
         return () => {
             player.removeListener('ready',);
             player.removeListener('authentication_error',);
-            clearInterval(useRef.current)
+            clearInterval(intervalRef.current)
         };
     }, [player])
    
@@ -69,7 +79,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )

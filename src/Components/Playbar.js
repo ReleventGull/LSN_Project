@@ -1,10 +1,21 @@
-import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
-const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
+import { useMemo } from "react"
+const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs, currentSongMs}) => {
+    console.log("Song miliseconds", songMs)
     const onToggle = () => {
         player.togglePlay().then(result => {
             setIsPlaying((val) => !val)
         })
+    }
+    const calculateCurrentStamp = (milis) => {
+        let miliseconds = milis
+        if(!miliseconds) {
+            return '00:00'
+        }
+        const minutes = String(Math.floor(miliseconds/60000)) 
+        miliseconds -= (Number(minutes) * 60000)
+        const seconds = String(Math.floor(miliseconds/1000))
+
+        return `${(minutes.length > 1 ? minutes : minutes.length == 1 ? `0${minutes}` : '00')}:${(seconds.length > 1 ? seconds : seconds.length == 1 ? `0${seconds}` : '00')}`
     }
     return (
         <div className="bg-white h-20">
@@ -16,15 +27,15 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
                             <div className="h-full flex items-center justify-center">
                                 <img className="w-16 rounded-md" src={songPlaying.album.images[0].url}/>
                             </div>
-                            <div>
-                                <h1 className="text-textPrimary font-bold">{songPlaying.name}</h1>
+                            <div className="line-clamp-2">
+                                <h1 className="text-textPrimary line-clamp-2 font-bold">{songPlaying.name}</h1>
                                 <p className="text-darkPrimary text-xs text-bold">{songPlaying.artists[0].name}</p>
                             </div>
                         </div>   
                         }
                         
                     </div>
-                    <div className="h-full">
+                    <div className="h-full flex flex-col">
                         <div className="flex mt-2 flex-row w-full content-end justify-center gap-10">
                             <svg  className="skipButton" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
@@ -40,20 +51,16 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying}) => {
                                     :
                                 <path className="pausePath" d="M21,21H3L12,3Z"/>
                                 }
-                                
-                                
-                                
-
                             </svg>
-                            
                             <svg  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path className="color-#FFFFFFF"  d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
-                        
                         </div>
-                            <div className="w-full">
-                                <div className="w-full">
-                                <input type="range" min="1" max="100" value="1" class="rangeSlider"/>
+                            <div className="w-full grow">
+                                <div className="w-full h-full flex gap-2 items-center align-center justify-center">
+                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(currentSongMs), [currentSongMs])}</p>
+                                <input type="range" min="1" max={songMs} value={currentSongMs} class="rangeSlider"/>
+                                <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(songMs), [songMs])}</p>
                                 </div>
                             </div>
                         <div>

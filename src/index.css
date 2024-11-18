@@ -8,7 +8,7 @@
     padding: 0;
 }
 .rangeSlider {
-    @apply appearance-none h-1 w-full bg-gray-300 rounded-full; /* For overall styling */
+    @apply appearance-none h-1 grow bg-gray-300 rounded-full; /* For overall styling */
   }
   
   .rangeSlider::-webkit-slider-runnable-track {
