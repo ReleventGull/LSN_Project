@@ -1,10 +1,7 @@
 import { useMemo } from "react"
-const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, songMs, currentSongMs}) => {
-    console.log("Song miliseconds", songMs)
+const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, isPlayingRef, songMs, currentSongMs}) => {
     const onToggle = () => {
-        player.togglePlay().then(result => {
-            setIsPlaying((val) => !val)
-        })
+        player.togglePlay()
     }
     const calculateCurrentStamp = (milis) => {
         let miliseconds = milis
