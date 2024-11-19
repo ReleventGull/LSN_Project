@@ -11,8 +11,18 @@ const LSNApp = () => {
     const [songMs, setSongMs] = useState(null)
     const [currentSongMs, setCurrentSongMs] = useState(null)
     
+    const isPlayingRef = useRef(null)
     const intervalRef = useRef(null)
     
+    useEffect(() => {
+        if(isPlayingRef.current === null) {
+            console.log("I returned")
+            return
+        }
+        console.log(isPlayingRef, 'Inside the current use effect    ')
+        setIsPlaying(isPlayingRef.current)
+    }, [isPlayingRef.current])
+
     const initializePlayer = async() => {
         const token = localStorage.getItem('LSNToken')
         const webPlayer = new Spotify.Player({
@@ -29,6 +39,7 @@ const LSNApp = () => {
             console.log("No player set")
             return
         }
+        console.log("Player has been set")
         player.addListener('ready', async({device_id}) => {
             const response = await activateDevice({token: localStorage.getItem('LSNToken'), deviceId: device_id})
             setDeviceId(device_id)
@@ -37,19 +48,27 @@ const LSNApp = () => {
             console.log("Error")
         })
         intervalRef.current = setInterval( async() => {
+            console.log("I'm literally running", isPlayingRef.current)
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
-            console.log("Fetched Respones", response)
+            if(!response) {
+                console.log("There was no response")
+                return
+            }
+            console.log(response)
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
-            }
-            if(isPlaying === null) {
-                setIsPlaying(response.is_playing)
             }
             if(songMs !== response.item.duration_ms) {
                 setSongMs(response.item.duration_ms)
             }
             if(currentSongMs !== response.progress_ms) {
                 setCurrentSongMs(response.progress_ms)
+            }
+            if (isPlayingRef.current === null) {
+                isPlayingRef.current = response.is_playing
+            }
+            if(response.is_playing !== isPlayingRef.current) {
+                isPlayingRef.current = response.is_playing
             }
         }, 1000)
         return () => {
@@ -79,7 +98,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
