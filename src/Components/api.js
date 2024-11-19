@@ -86,9 +86,14 @@ export const getPlaybackState = async ({token}) => {
                 'Authorization': `Bearer ${token}`
             }
         })
+        if(!response.ok) {
+            console.log("There is no ok!!")
+            throw new Error('failed to fetch state')
+        }
         const data = response.json()
         return data
     }catch(error) {
-        console.log("Error", error)
+        console.error("Error fetching playback", error)
+        return []
     }
 }

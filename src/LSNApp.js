@@ -48,13 +48,10 @@ const LSNApp = () => {
             console.log("Error")
         })
         intervalRef.current = setInterval( async() => {
-            console.log("I'm literally running", isPlayingRef.current)
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
             if(!response) {
-                console.log("There was no response")
                 return
             }
-            console.log(response)
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }
