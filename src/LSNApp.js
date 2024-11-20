@@ -23,7 +23,7 @@ const LSNApp = () => {
         setIsPlaying(isPlayingRef.current)
     }, [isPlayingRef.current])
 
-    const initializePlayer = async() => {
+        const initializePlayer = async() => {
         const token = localStorage.getItem('LSNToken')
         const webPlayer = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
