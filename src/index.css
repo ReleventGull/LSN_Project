@@ -78,8 +78,13 @@
 }
 
 .recentCard {
-  @apply flex flex-col flex-1 w-auto cursor-pointer p-2 rounded-md hover:bg-backgroundSecondary overflow-hidden text-ellipsis whitespace-nowrap
+  @apply relative flex flex-col flex-1 w-auto cursor-pointer p-2 rounded-md hover:bg-backgroundSecondary overflow-hidden text-ellipsis whitespace-nowrap
 }
+.recentCardPlayButton {
+@apply hover:bg-white bg-textPrimary rotate-90 rounded-full absolute z-10 w-10 p-1 bottom-0 right-0 -translate-y-12 -translate-x-3 opacity-0
+}
+
+
 .pausePath {
   transform: scale(.8) translate(.2rem, .05rem)
 }

@@ -23,7 +23,7 @@ const LSNApp = () => {
         setIsPlaying(isPlayingRef.current)
     }, [isPlayingRef.current])
 
-    const initializePlayer = async() => {
+        const initializePlayer = async() => {
         const token = localStorage.getItem('LSNToken')
         const webPlayer = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
@@ -48,13 +48,10 @@ const LSNApp = () => {
             console.log("Error")
         })
         intervalRef.current = setInterval( async() => {
-            console.log("I'm literally running", isPlayingRef.current)
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
             if(!response) {
-                console.log("There was no response")
                 return
             }
-            console.log(response)
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }

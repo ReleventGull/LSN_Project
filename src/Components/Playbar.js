@@ -15,7 +15,9 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, isPlayingRef, so
         return `${(minutes.length > 1 ? minutes : minutes.length == 1 ? `0${minutes}` : '00')}:${(seconds.length > 1 ? seconds : seconds.length == 1 ? `0${seconds}` : '00')}`
     }
     return (
-        <div className="bg-white h-20">
+        
+            player ? 
+            <div className="bg-white h-20">
                 <div className="grid grid-cols-[1fr_1.5fr_1fr] w-full h-full bg-playbar">
                     <div className="h-full">
                         {
@@ -76,6 +78,8 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, isPlayingRef, so
                     </div>
                 </div>
         </div>
+        :
+        ''   
     )
 }
 export default Playbar
