@@ -43,6 +43,7 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
 };
 
 export const playTrack = async({token, uri, deviceId}) => {
+    console.log(uri)
     try {
         console.log('Playing at this device', deviceId)
         const response = await fetch('https://api.spotify.com/v1/me/player/play', {
@@ -52,7 +53,7 @@ export const playTrack = async({token, uri, deviceId}) => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              uris: [uri],
+              uris: uri,
             }),
           })
     }catch(error){
@@ -60,6 +61,24 @@ export const playTrack = async({token, uri, deviceId}) => {
     }
 }
 
+export const playAlbumOrArtist = async({token, uri, deviceId}) => {
+    console.log(uri)
+    try {
+        console.log('Playing at this device', deviceId)
+        const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              context_uri: uri,
+            }),
+          })
+    }catch(error){
+        console.log("Error", error)
+    }
+}
 export const activateDevice = async({token, deviceId}) => {
     try {
         const response = await fetch(`https://api.spotify.com/v1/me/player`, {
@@ -95,5 +114,36 @@ export const getPlaybackState = async ({token}) => {
     }catch(error) {
         console.error("Error fetching playback", error)
         return []
+    }
+}
+
+export const getArtistAlbums = async({id, token}) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+ 
+        )
+        const data = response.json()
+        return data
+    }catch(error) {
+        console.error('error fetching artists albums', error)
+    }
+}
+
+export const getAlbumTracks = async({id, token}) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+)
+        const data = response.json()
+        return data
+    }catch(error) {
+        console.error('error fetching artists albums', error)
     }
 }

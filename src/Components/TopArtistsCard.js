@@ -1,14 +1,14 @@
-import { playTrack } from "./api"
-
+import { playTrack, getArtistAlbums, getAlbumTracks, playAlbumOrArtist } from "./api"
+import { useState } from "react"
 const TopArtistsCard = ({images, card, index, deviceId}) => {
     let style = {
         backgroundImage: `url(${images[0].url})`
     }
     const checkCard = async() => {
-        if(card.type == 'artists') {
-            console.log("play artist songs")
+        if(card.type == 'artist') {
+           await playAlbumOrArtist({token: localStorage.getItem("LSNToken"), uri: card.uri, deviceId: deviceId})
+        
         }else if (card.type == 'track') {
-            console.log("TRACK HERE", card)
             const response = await playTrack({token: localStorage.getItem("LSNToken"), uri: card.uri, deviceId: deviceId})
         }
     }
