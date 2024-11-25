@@ -49,7 +49,7 @@ const LSNApp = () => {
         })
         intervalRef.current = setInterval( async() => {
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
-            if(!response) {
+            if(!response.item) {
                 return
             }
             if (!songPlaying || songPlaying.id !== response.id) {

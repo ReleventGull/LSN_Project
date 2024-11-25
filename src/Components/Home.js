@@ -39,7 +39,7 @@ const Home = ({player, deviceId}) => {
                 <h1 className="font-bold mb-1 text-textPrimary">Top Artists</h1>
                 <div className="gap-2 flex">
                     {topArtists.map((card, index) =>
-                        <TopArtistsCard key={index} images={card.images} index={index} card={card}/>
+                        <TopArtistsCard key={index} deviceId={deviceId} images={card.images} index={index} card={card}/>
                     )}
                 </div>
             </div>
