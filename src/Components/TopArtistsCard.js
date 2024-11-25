@@ -9,7 +9,8 @@ const TopArtistsCard = ({images, card, index, deviceId}) => {
            await playAlbumOrArtist({token: localStorage.getItem("LSNToken"), uri: card.uri, deviceId: deviceId})
         
         }else if (card.type == 'track') {
-            const response = await playTrack({token: localStorage.getItem("LSNToken"), uri: card.uri, deviceId: deviceId})
+            console.log()
+            const response = await playTrack({token: localStorage.getItem("LSNToken"), uri: [card.uri], deviceId: deviceId})
         }
     }
     return (
