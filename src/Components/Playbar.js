@@ -36,7 +36,7 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, isPlayingRef, so
                     </div>
                     <div className="h-full flex flex-col">
                         <div className="flex mt-2 flex-row w-full content-end justify-center gap-10">
-                            <svg  className="skipButton" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg onClick={() => player.previousTrack()} className="skipButton" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
                             
@@ -51,7 +51,7 @@ const Playbar = ({isPlaying, songPlaying, player, setIsPlaying, isPlayingRef, so
                                 <path className="pausePath" d="M21,21H3L12,3Z"/>
                                 }
                             </svg>
-                            <svg  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg onClick={() => player.nextTrack()}  className="skipButton second" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path className="color-#FFFFFFF"  d="M2 1H6V7L12 1H14V15H12L6 9V15H2V1Z" fill="#FFFFFF"/>
                             </svg>
                         </div>
