@@ -10,10 +10,16 @@ const LSNApp = () => {
     const [isPlaying, setIsPlaying] = useState(null)    
     const [songMs, setSongMs] = useState(null)
     const [currentSongMs, setCurrentSongMs] = useState(null)
+    const [deviceVolume, setDeviceVolume] = useState(null)
     
     const isPlayingRef = useRef(null)
     const intervalRef = useRef(null)
-    
+    const volumeRef = useRef(null)
+    useEffect(() => {
+        if(volumeRef.current !== null) {
+            setDeviceVolume(volumeRef.current)
+        }
+    }, [volumeRef.current])
     useEffect(() => {
         if(isPlayingRef.current === null) {
             console.log("I returned")
@@ -52,6 +58,7 @@ const LSNApp = () => {
             if(!response.item) {
                 return
             }
+            console.log(response)
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }
@@ -66,6 +73,9 @@ const LSNApp = () => {
             }
             if(response.is_playing !== isPlayingRef.current) {
                 isPlayingRef.current = response.is_playing
+            }
+            if(volumeRef.current === null) {
+                volumeRef.current = response.device.volume_percent
             }
         }, 1000)
         return () => {
@@ -95,7 +105,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
