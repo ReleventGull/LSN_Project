@@ -1,6 +1,5 @@
 import { useMemo } from "react"
-const Playbar = ({isPlaying, deviceVolume, setDeviceVolume, songPlaying, player, setIsPlaying, isPlayingRef, songMs, currentSongMs}) => {
-    console.log(deviceVolume)
+const Playbar = ({setCurrentSongMs, navigatingSong, isPlaying, deviceVolume, setDeviceVolume, songPlaying, player, setIsPlaying, isPlayingRef, songMs, currentSongMs}) => {
     const onToggle = () => {
         player.togglePlay()
     }
@@ -59,7 +58,7 @@ const Playbar = ({isPlaying, deviceVolume, setDeviceVolume, songPlaying, player,
                             <div className="w-full grow">
                                 <div className="w-full h-full flex gap-2 items-center align-center justify-center">
                                 <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(currentSongMs), [currentSongMs])}</p>
-                                <input type="range" min="1" max={songMs} value={currentSongMs} class="rangeSlider"/>
+                                <input onMouseUp={() => {navigatingSong.current=false, player.seek(currentSongMs)}} onChange={(e) => setCurrentSongMs(e.target.value)} onMouseDown={() => navigatingSong.current=true} type="range" min="1" max={songMs} value={currentSongMs} class="rangeSlider"/>
                                 <p className="text-textPrimary text-xs font-bold">{useMemo(() => calculateCurrentStamp(songMs), [songMs])}</p>
                                 </div>
                             </div>

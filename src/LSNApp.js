@@ -15,6 +15,7 @@ const LSNApp = () => {
     const isPlayingRef = useRef(null)
     const intervalRef = useRef(null)
     const volumeRef = useRef(null)
+    const navigatingSong = useRef(false)
     useEffect(() => {
         if(volumeRef.current !== null) {
             setDeviceVolume(volumeRef.current)
@@ -25,7 +26,6 @@ const LSNApp = () => {
             console.log("I returned")
             return
         }
-        console.log(isPlayingRef, 'Inside the current use effect    ')
         setIsPlaying(isPlayingRef.current)
     }, [isPlayingRef.current])
 
@@ -58,14 +58,13 @@ const LSNApp = () => {
             if(!response.item) {
                 return
             }
-            console.log(response)
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }
             if(songMs !== response.item.duration_ms) {
                 setSongMs(response.item.duration_ms)
             }
-            if(currentSongMs !== response.progress_ms) {
+            if(currentSongMs !== response.progress_ms && !navigatingSong.current) {
                 setCurrentSongMs(response.progress_ms)
             }
             if (isPlayingRef.current === null) {
@@ -105,7 +104,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar navigatingSong={navigatingSong} setCurrentSongMs={setCurrentSongMs} setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
