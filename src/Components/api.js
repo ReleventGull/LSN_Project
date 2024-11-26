@@ -43,9 +43,7 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
 };
 
 export const playTrack = async({token, uri, deviceId}) => {
-    console.log(uri)
     try {
-        console.log('Playing at this device', deviceId)
         const response = await fetch('https://api.spotify.com/v1/me/player/play', {
             method: 'PUT',
             headers: {
@@ -104,7 +102,7 @@ export const getPlaybackState = async ({token}) => {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        })
+        })  
         if(!response.ok) {
             console.log("There is no ok!!")
             throw new Error('failed to fetch state')
