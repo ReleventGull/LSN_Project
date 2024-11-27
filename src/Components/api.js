@@ -35,6 +35,7 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
                 'Authorization': `Bearer ${token}`,
             },
         });
+        console.log("Response here", response)
         const data = await response.json();
         return data; 
     } catch (error) {

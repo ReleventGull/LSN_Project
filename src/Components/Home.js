@@ -14,9 +14,6 @@ const Home = ({player, deviceId}) => {
     const getUsersTopArtists = async() => {
         const response = await getTopArtists({token: localStorage.getItem("LSNToken"), limit: 7})
         setTopArtists(response.items)
-        const arr = selectRandomArtists(response.items)
-        const responseTwo = await getRecommendations({token: localStorage.getItem("LSNToken"), limit: 7, aritistIds: arr})
-        setRecommended(responseTwo.tracks)
     }
 
     useEffect(() => {
@@ -47,9 +44,7 @@ const Home = ({player, deviceId}) => {
           <div className="w-full p-2">
                 <h1 className="font-bold mb-1 text-textPrimary">Recommendations</h1>
                 <div className="gap-2 flex">
-                    {recommended.map((card, index) =>
-                        <TopArtistsCard key={index} images={card.album.images} index={index} card={card}/>
-                    )}
+
                 </div>
             </div>
 

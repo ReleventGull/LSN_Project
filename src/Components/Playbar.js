@@ -22,15 +22,22 @@ const Playbar = ({setCurrentSongMs, navigatingSong, isPlaying, deviceVolume, set
                     <div className="h-full">
                         {
                             !songPlaying ? '' : 
-                        <div className="flex ml-2 gap-5 h-full items-center">
-                            <div className="h-full flex items-center justify-center">
-                                <img className="w-16 rounded-md" src={songPlaying.album.images[0].url}/>
+                        <div className="grid grid-cols-[auto_2fr] items-center">
+                            <div className="box-border p-2 h-full flex items-center ">
+                                <img className="w-16 box-border rounded-md" src={songPlaying.album.images[0].url}/>
                             </div>
-                            <div className="line-clamp-2">
-                                <h1 className="text-textPrimary line-clamp-2 font-bold">{songPlaying.name}</h1>
-                                <p className="text-darkPrimary text-xs text-bold">{songPlaying.artists[0].name}</p>
+                            <div className="flex flex-row items-center">
+                                <div className="line-clamp-2">
+                                    <h1 className="text-textPrimary line-clamp-2 font-bold">{songPlaying.name}</h1>
+                                    <p className="text-darkPrimary text-xs text-bold">{songPlaying.artists[0].name}</p>
+                                </div>  
+                                <div className="w-16 h-16">
+                                </div>    
                             </div>
-                        </div>   
+                           
+
+                        </div>
+
                         }
                         
                     </div>
