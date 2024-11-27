@@ -3,7 +3,7 @@ let client_secret = '0347d924fb8844a48a180f32c2e61175'
 var redirect_uri = 'http://localhost:3000/callback';
 
 
-var scope = 'user-top-read user-read-recently-played user-read-email user-read-private user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private user-follow-read user-follow-modify';
+var scope = 'user-library-read user-top-read user-read-recently-played user-read-email user-read-private user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private user-follow-read user-follow-modify';
 
 var url = 'https://accounts.spotify.com/authorize';
 url += '?response_type=token';

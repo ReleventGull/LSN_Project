@@ -35,6 +35,7 @@ export const getRecommendations = async ({ token, limit, aritistIds }) => {
                 'Authorization': `Bearer ${token}`,
             },
         });
+        console.log("Response here", response)
         const data = await response.json();
         return data; 
     } catch (error) {
@@ -143,5 +144,20 @@ export const getAlbumTracks = async({id, token}) => {
         return data
     }catch(error) {
         console.error('error fetching artists albums', error)
+    }
+}
+
+export const checkIfTrackIsLiked = async ({id, token}) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/me/tracks/contains?ids=${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        const data = await response.json()
+        return data
+    }catch(error) {
+        console.error("Error checking if track is liked", error)
+
     }
 }

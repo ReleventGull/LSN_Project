@@ -2,7 +2,7 @@ import {Route, Routes } from 'react-router-dom'
 import { useMemo } from 'react'
 import { Playbar, Navbar, Home, Playlist} from './Components/Components'
 import { useEffect, useState, useRef } from 'react'
-import { activateDevice, getPlaybackState } from './Components/api'
+import { activateDevice, getPlaybackState, checkIfTrackIsLiked } from './Components/api'
 const LSNApp = () => {
     const [player, setPlayer] = useState(null)
     const [deviceId, setDeviceId] = useState(null)
@@ -11,7 +11,7 @@ const LSNApp = () => {
     const [songMs, setSongMs] = useState(null)
     const [currentSongMs, setCurrentSongMs] = useState(null)
     const [deviceVolume, setDeviceVolume] = useState(null)
-    
+    const [trackLiked, setTrackLiked] = useState(null)
     const isPlayingRef = useRef(null)
     const intervalRef = useRef(null)
     const volumeRef = useRef(null)
@@ -55,9 +55,15 @@ const LSNApp = () => {
         })
         intervalRef.current = setInterval( async() => {
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
+            if(response.item) {
+                const trackLikedReponse = await checkIfTrackIsLiked({id: response.item.id, token: localStorage.getItem("LSNToken")})
+                console.log(trackLikedReponse)
+            }
+           
             if(!response.item) {
                 return
             }
+            
             if (!songPlaying || songPlaying.id !== response.id) {
                 setSongPlaying(response.item)
             }
@@ -76,6 +82,7 @@ const LSNApp = () => {
             if(volumeRef.current === null) {
                 volumeRef.current = response.device.volume_percent
             }
+            
         }, 1000)
         return () => {
             player.removeListener('ready',);
