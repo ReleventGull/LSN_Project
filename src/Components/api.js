@@ -1,3 +1,5 @@
+import { json } from "react-router-dom";
+
 let client_id = 'b753c8e4025041c5b2709dbdf7de6e43';
 
 export const getRecentlyListened = async ({ token, limit }) => {
@@ -159,5 +161,61 @@ export const checkIfTrackIsLiked = async ({id, token}) => {
     }catch(error) {
         console.error("Error checking if track is liked", error)
 
+    }
+}
+
+export const likeTrack = async({token, id}) => {
+    console.log("ID HERE", id)
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/me/tracks`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                ids: [id]
+            })
+        }).then(response => {
+            if(response.ok) {
+                return response.text().then(body => {
+                    if(!body) {
+                        return response
+                    }else {
+                        return body.json()
+                    }
+                })
+            }
+        })
+        return response
+    }catch(error) {
+        console.error("There was an error liking the track", error)
+    }
+}
+
+export const removeLikedTrack = async({token, id}) => {
+    
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/me/tracks`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                ids: [id]
+            })
+        }).then(result => {
+            if(result.ok) {
+                return result.text().then(body => {
+                    if(body) {
+                        return body
+                    }else {
+                        return result
+                    }
+                })
+            }
+        })
+        return response
+    }catch(error) {
+        console.error("There was an error liking the track", error)
     }
 }
