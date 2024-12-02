@@ -135,3 +135,14 @@
     display: none;
   }
 }
+.likeSongIcon {
+  @apply h-4 ml-4
+}
+.likeSongIcon {
+  stroke: #B1B3C0;
+}
+
+.likeSongIcon:hover {
+  stroke: #FFFFFF;
+  cursor: pointer;
+}
