@@ -136,7 +136,7 @@
   }
 }
 .likeSongIcon {
-  @apply h-4 ml-4
+  @apply h-5 ml-3 mr-3
 }
 .likeSongIcon {
   stroke: #B1B3C0;
@@ -145,4 +145,15 @@
 .likeSongIcon:hover {
   stroke: #FFFFFF;
   cursor: pointer;
+}
+
+.songLikedIcon {
+  @apply h-5 ml-3 mr-3 
+}
+.songLikedIcon path {
+  @apply fill-textPrimary
+}
+
+.songLikedIcon:hover > path {
+  @apply fill-white cursor-pointer
 }

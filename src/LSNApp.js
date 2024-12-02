@@ -16,11 +16,24 @@ const LSNApp = () => {
     const intervalRef = useRef(null)
     const volumeRef = useRef(null)
     const navigatingSong = useRef(false)
+    const songPlayingRef = useRef(null)
+    const checkIfLiked = async() => {
+        const [response] = await checkIfTrackIsLiked({id: songPlayingRef.current.id, token: localStorage.getItem("LSNToken")})
+        setTrackLiked(response)
+    }
+    useEffect(() => {
+        setSongPlaying(songPlayingRef.current)
+        if(songPlayingRef.current) {
+            checkIfLiked()
+        }
+    }, [songPlayingRef.current])
+    
     useEffect(() => {
         if(volumeRef.current !== null) {
             setDeviceVolume(volumeRef.current)
         }
     }, [volumeRef.current])
+
     useEffect(() => {
         if(isPlayingRef.current === null) {
             console.log("I returned")
@@ -28,8 +41,10 @@ const LSNApp = () => {
         }
         setIsPlaying(isPlayingRef.current)
     }, [isPlayingRef.current])
+    
 
-        const initializePlayer = async() => {
+        
+    const initializePlayer = async() => {
         const token = localStorage.getItem('LSNToken')
         const webPlayer = new Spotify.Player({
             name: "Web Playback SDK Quick Start Player",
@@ -55,17 +70,12 @@ const LSNApp = () => {
         })
         intervalRef.current = setInterval( async() => {
             const response = await getPlaybackState({token: localStorage.getItem("LSNToken")})
-            if(response.item) {
-                const trackLikedReponse = await checkIfTrackIsLiked({id: response.item.id, token: localStorage.getItem("LSNToken")})
-                console.log(trackLikedReponse)
-            }
-           
             if(!response.item) {
                 return
             }
             
-            if (!songPlaying || songPlaying.id !== response.id) {
-                setSongPlaying(response.item)
+            if (!songPlayingRef.current || songPlayingRef.current.id !== response.item.id) {
+                songPlayingRef.current = response.item
             }
             if(songMs !== response.item.duration_ms) {
                 setSongMs(response.item.duration_ms)
@@ -111,7 +121,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar navigatingSong={navigatingSong} setCurrentSongMs={setCurrentSongMs} setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar trackLiked={trackLiked} navigatingSong={navigatingSong} setCurrentSongMs={setCurrentSongMs} setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
