@@ -121,7 +121,7 @@ const LSNApp = () => {
                 </Routes>
           
                 </div>
-        <Playbar trackLiked={trackLiked} navigatingSong={navigatingSong} setCurrentSongMs={setCurrentSongMs} setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
+        <Playbar setTrackLiked={setTrackLiked} trackLiked={trackLiked} navigatingSong={navigatingSong} setCurrentSongMs={setCurrentSongMs} setDeviceVolume={setDeviceVolume} deviceVolume={deviceVolume} isPlayingRef={isPlayingRef} currentSongMs={currentSongMs} songMs={songMs} setIsPlaying={setIsPlaying} songPlaying={songPlaying} isPlaying={isPlaying} player={player}/>
         </div>
         
     )
